@@ -6,7 +6,7 @@ Research and calculate some information from Transfermarkt APIs
 
 ## Current features
 - Analyse squad for move of their Market Values; 
-- Next features can be suggested in the issue tab of repository for future releases.
+- Next features can be suggested in the issue tab of repository.
 
 # Stack
 Scrape: selenium  
