@@ -48,19 +48,3 @@ if __name__ == "__main__":
                 continue
 
             break
-'''
-next features:
-web ui
-
-hide columns 
-
-add extra attributes to player from https://tmapi-alpha.transfermarkt.technology/player/XXX or another source in def getPlayerAPI
-
-work with table (work with configuration of view - filters, sorts):
- for example: 
- 1)newcomers only (have only current value), valuable players (have prev and current value)
- 2)hide some cols or show after hide
-
-compare two and more players with each other and return common matches (against and together)
-
-'''
