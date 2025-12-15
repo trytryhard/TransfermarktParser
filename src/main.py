@@ -1,5 +1,6 @@
 from parser import Parse
 
+
 def show_menu():
     print("\n=== MENU ===")
     print("9 — Parse another club")
@@ -11,8 +12,8 @@ def show_menu():
     print("q — Quit")
     print("============")
 
-def main():
 
+def main():
     teamURL = input("Input club's URL from Transfermarkt : ")
 
     teamInstance = Parse(teamURL)
@@ -24,15 +25,15 @@ def main():
         show_menu()
         choice = input("Select option: ").strip()
 
-        if choice.lower() in ["q","й"]:
+        if choice.lower() in ["q", "й"]:
             print("Thx for usage!")
             break
 
-        if choice in [str(x) for x in range(0,5)]:
+        if choice in [str(x) for x in range(0, 5)]:
             teamInstance.workWithPlDict(choice)
             teamInstance.print_markdown_table()
-        elif choice in '9':
-            return 'Restart'
+        elif choice in "9":
+            return "Restart"
         else:
             print("Unknown option. Try again.")
 
@@ -40,11 +41,11 @@ def main():
 
 
 if __name__ == "__main__":
-        while True:
-            resMain = main()
+    while True:
+        resMain = main()
 
-            if resMain == "Restart":
-                print("\n====\n")
-                continue
+        if resMain == "Restart":
+            print("\n====\n")
+            continue
 
-            break
+        break
