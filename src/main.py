@@ -1,7 +1,10 @@
+"""main script"""
+
 from parser import Parse
 
 
 def show_menu():
+    """Menu print"""
     print("\n=== MENU ===")
     print("9 — Parse another club")
     print("0 — Reset to original dataframe")
@@ -14,12 +17,14 @@ def show_menu():
 
 
 def main():
-    teamURL = input("Input club's URL from Transfermarkt : ")
+    """Application entry point."""
+    team_url = input("Input club's URL from Transfermarkt : ")
+    print("Please wait a second before data scraping")
 
-    teamInstance = Parse(teamURL)
-    teamInstance.checkTeamStatus()
-    teamInstance.listOfTeamMembers()
-    teamInstance.getPlayerDataAPI()
+    team_instance = Parse(team_url)
+    team_instance.check_team_status()
+    team_instance.list_of_team_members()
+    team_instance.get_player_data_api()
 
     while True:
         show_menu()
@@ -30,13 +35,12 @@ def main():
             break
 
         if choice in [str(x) for x in range(0, 5)]:
-            teamInstance.workWithPlDict(choice)
-            teamInstance.print_markdown_table()
+            team_instance.work_with_pl_dict(choice)
+            team_instance.print_markdown_table()
         elif choice in "9":
             return "Restart"
-        else:
-            print("Unknown option. Try again.")
 
+        print("Unknown option. Try again.")
     return True
 
 
