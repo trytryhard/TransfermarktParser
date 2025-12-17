@@ -1,4 +1,4 @@
 .idea
 .venv
 *debug.py
-*__pychache__
+*__pycache__
