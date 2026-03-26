@@ -38,7 +38,6 @@ def main():
             team_instance.work_with_pl_dict(choice)
             team_instance.print_markdown_table()
 
-
         elif choice in "9":
             return "Restart"
 

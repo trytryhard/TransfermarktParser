@@ -155,7 +155,7 @@ class Parse:
                 json_value = json_value["data"]["marketValueDetails"]
                 json_mrkt_det = json_value["current"]["compact"]
 
-                #self._players_dict[i]["currency"] = json_mrkt_det["prefix"]
+                # self._players_dict[i]["currency"] = json_mrkt_det["prefix"]
                 dict_val["currency"] = json_mrkt_det["prefix"]
                 dict_val["curr_price"] = json_mrkt_det["content"] + json_mrkt_det["suffix"]
 
@@ -170,9 +170,7 @@ class Parse:
                     json_mrkt_det = json_value["delta"]
 
                     dict_val["delta_val"] = int(json_mrkt_det["value"].split()[0].replace(".", ""))
-                    dict_val["delta_percent, %"] = float(
-                        json_mrkt_det["percentage"].split()[0].replace(",", ".")
-                    )
+                    dict_val["delta_percent, %"] = float(json_mrkt_det["percentage"].split()[0].replace(",", "."))
 
             else:
                 dict_val["current_price"] = "-"
