@@ -120,10 +120,11 @@ class Parse:
 
         del self._players_dict["id"]
 
-        for i in self._players_dict:
-            numb, pos = number_pos.pop(0)
-            self._players_dict[i]["number"] = numb
-            self._players_dict[i]["pos"] = pos
+        number_pos = number_pos[::-1]
+        for uid, dict_val in self._players_dict.items():
+            numb, pos = number_pos.pop()
+            dict_val["number"] = numb
+            dict_val["pos"] = pos
 
         return True
 
@@ -145,8 +146,8 @@ class Parse:
 
         time.sleep(1)
 
-        for i in self._players_dict:
-            driver.get(Parse.URL_API_PLAYER + i)
+        for uid, dict_val in self._players_dict.items():
+            driver.get(Parse.URL_API_PLAYER + uid)
             json_value = json.loads(driver.find_element(By.CSS_SELECTOR, "pre").text)
 
             if "success" in json_value.keys() and "marketValueDetails" in json_value["data"].keys():
@@ -154,29 +155,30 @@ class Parse:
                 json_value = json_value["data"]["marketValueDetails"]
                 json_mrkt_det = json_value["current"]["compact"]
 
-                self._players_dict[i]["currency"] = json_mrkt_det["prefix"]
-                self._players_dict[i]["curr_price"] = json_mrkt_det["content"] + json_mrkt_det["suffix"]
+                #self._players_dict[i]["currency"] = json_mrkt_det["prefix"]
+                dict_val["currency"] = json_mrkt_det["prefix"]
+                dict_val["curr_price"] = json_mrkt_det["content"] + json_mrkt_det["suffix"]
 
                 if "previous" not in json_value:
-                    self._players_dict[i]["prev_price"] = "-"
-                    self._players_dict[i]["delta_val"] = "-"
-                    self._players_dict[i]["delta_percent, %"] = "-"
+                    dict_val["prev_price"] = "-"
+                    dict_val["delta_val"] = "-"
+                    dict_val["delta_percent, %"] = "-"
                 else:
                     json_mrkt_det = json_value["previous"]["compact"]
-                    self._players_dict[i]["prev_price"] = json_mrkt_det["content"] + json_mrkt_det["suffix"]
+                    dict_val["prev_price"] = json_mrkt_det["content"] + json_mrkt_det["suffix"]
 
                     json_mrkt_det = json_value["delta"]
 
-                    self._players_dict[i]["delta_val"] = int(json_mrkt_det["value"].split()[0].replace(".", ""))
-                    self._players_dict[i]["delta_percent, %"] = float(
+                    dict_val["delta_val"] = int(json_mrkt_det["value"].split()[0].replace(".", ""))
+                    dict_val["delta_percent, %"] = float(
                         json_mrkt_det["percentage"].split()[0].replace(",", ".")
                     )
 
             else:
-                self._players_dict[i]["current_price"] = "-"
-                self._players_dict[i]["last_price"] = "-"
-                self._players_dict[i]["delta_val"] = "-"
-                self._players_dict[i]["delta_percent, %"] = "-"
+                dict_val["current_price"] = "-"
+                dict_val["last_price"] = "-"
+                dict_val["delta_val"] = "-"
+                dict_val["delta_percent, %"] = "-"
 
             self.df = pd.DataFrame.from_dict(self._players_dict, orient="index")
             self.df = self.df.replace("-", pd.NA)

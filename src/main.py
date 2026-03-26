@@ -37,10 +37,13 @@ def main():
         if choice in [str(x) for x in range(0, 5)]:
             team_instance.work_with_pl_dict(choice)
             team_instance.print_markdown_table()
+
+
         elif choice in "9":
             return "Restart"
 
-        print("Unknown option. Try again.")
+        else:
+            print("Unknown option. Try again.")
     return True
 
 
