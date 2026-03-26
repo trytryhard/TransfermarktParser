@@ -120,7 +120,7 @@ class Parse:
 
         del self._players_dict["id"]
 
-        for i in self._players_dict.items():
+        for i in self._players_dict.keys():
             numb, pos = number_pos.pop(0)
             self._players_dict[i]["number"] = numb
             self._players_dict[i]["pos"] = pos
@@ -145,7 +145,7 @@ class Parse:
 
         time.sleep(1)
 
-        for i in self._players_dict.items():
+        for i in self._players_dict.keys():
             driver.get(Parse.URL_API_PLAYER + i)
             json_value = json.loads(driver.find_element(By.CSS_SELECTOR, "pre").text)
 
